@@ -1,4 +1,4 @@
-# Summary
+
 
 This report documents the course project 'Collaboration and Competition' where you train two agents to control rackets to bounce a ball over a net(play Tennis).
 
@@ -35,11 +35,9 @@ Replay buffer and Soft update are implemented for sample efficiency and stabilit
 
 ### Ideas for Future Work
 
-The performance of the Continuous Control agent can be improved by experimenting with below ideas:
- 1. Implement [Trust Region Policy Optimization(TRPO)](https://arxiv.org/abs/1502.05477) as suggested in [Benchmarking Deep Reinforcement Learning for Continuous Control](https://arxiv.org/abs/1604.06778) paper.
- 2. Implement [Q-Prop: Sample-Efficient Policy Gradient with An Off-Policy Critic](https://arxiv.org/abs/1611.02247) for substantial gains in sample efficiency over trust region policy optimization (TRPO), and improved stability over deep deterministic policy gradient (DDPG) algorithm.
-
-
-```python
-
-```
+- Change network sizes and choose different hyperparameters
+- Trying other algorithms like PPO, A3C or D4PG
+- Use parameter space noise rather than noise on action. https://vimeo.com/252185862
+- Current our replay buffer is dumb. We can use prioritised experience buffer. https://github.com/Damcy/prioritized-experience-replay
+- Different replay buffer for actor/critic
+- Try adding dropouts in critic network
