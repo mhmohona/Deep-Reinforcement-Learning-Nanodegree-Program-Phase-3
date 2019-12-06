@@ -1,4 +1,6 @@
-### Learning Algorithm and implementation details:
+# Project one: Navigation
+
+## Learning Algorithm and implementation details:
 
 In this project, a reinforcement learning agent is trained using **Deep Q-Learning with Experience Replay and Fixed Q-Targets** in a Unity Banana-Collector Environment to navigate a square world collecting yellow bananas and avoiding blue bananas.  
 
@@ -45,24 +47,27 @@ Now, Here's the Deep Q-LEarning algorithm:
 
 ![Img6](img/img6.png)
 
-#### About this project:
-For this project, you will train an agent to navigate (and collect bananas!) in a large, square world.  
+### About this project:
+For this project, I have trained an agent to navigate (and collect bananas!) in a large, square world.  
 
-##### Reward:
+### Reward:
 A reward of +1 is provided for collecting a yellow banana, and a reward of -1 is provided for collecting a blue banana.  Thus, the goal of your agent is to collect as many yellow bananas as possible while avoiding blue bananas.  
 
-##### Observation Space:
+### Observation Space:
+
 The state space has 37 dimensions and contains the agent's velocity, along with ray-based perception of objects around agent's forward direction. Given this information, the agent has to learn how to best select actions.  
-##### Action Space: 
+
+### Action Space: 
 Four discrete actions are available, corresponding to:
 - **`0`** - move forward.
 - **`1`** - move backward.
 - **`2`** - turn left.
 - **`3`** - turn right.
-##### Goal:
+
+#### Goal:
 The task is episodic, and in order to solve the environment, your agent must get an average score of +13 over 100 consecutive episodes.
 
-##### Training Hyperparameters:
+### Training Hyperparameters:
 The agent is trained using the Deep Q-learning algorithm. The following Hyperparameters are used:   
 1) Network Hyperparameters:   
 ```
@@ -90,16 +95,14 @@ Soft-Update Parameter TAU : 1e-3
 Replay Buffer Size        : 1e5
 ```
 
-#### Final Results:
+### Final Results:
 
 Using Deep Q-Learning, the agent could solve the environment and collect more than 13 yellow bananas in less than 400 episodes.
 ![Img7](img/img7.png)
-#### Ideas for future improvements:
+
+
+### Ideas for future improvements:
 1) Further hyperparameter tuning.
 2) Using Double DQN
 3) Using Prioterized Experience Replay
 4) Using Dueling DQN
-
-
-
-
