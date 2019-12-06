@@ -1,13 +1,5 @@
-#### Udacity Deep Reinforcement Learning Nanodegree
+
 ### Project 2: Continuous Control
-# Train a Set of Robotic Arms
-
-<img src="assets/robot-pickers.gif" width="60%" align="top-left" alt="" title="Robot Arms" />
-
-*Photo credit: [Google AI Blog](https://ai.googleblog.com/2018/06/scalable-deep-reinforcement-learning.html)*
-
-##### &nbsp;
----
 
 ## Goal
 In this project, I build a reinforcement learning (RL) agent that controls a robotic arm within Unity's [Reacher](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md#reacher) environment. The goal is to get 20 different robotic arms to maintain contact with the green spheres.
@@ -16,7 +8,7 @@ A reward of +0.1 is provided for each timestep that the agent's hand is in the g
 
 In order to solve the environment, our agent must achieve a score of +30 averaged across all 20 agents for 100 consecutive episodes.
 
-![Trained Agent][image1]
+
 
 ## Summary of Environment
 - Set-up: Double-jointed arm which can move to target locations.
@@ -31,7 +23,7 @@ In order to solve the environment, our agent must achieve a score of +30 average
 - Reset Parameters: Two, corresponding to goal size, and goal movement speed.
 - Benchmark Mean Reward: 30
 
-##### &nbsp;
+
 
 ## Approach
 Here are the high-level steps taken in building an agent that solves this environment.
@@ -41,7 +33,7 @@ Here are the high-level steps taken in building an agent that solves this enviro
 1. Select an appropriate algorithm and begin implementing it.
 1. Run experiments, make revisions, and retrain the agent until the performance threshold is reached.
 
-##### &nbsp;
+
 
 ### 1. Evaluate State & Action Space
 The state space space has 33 dimensions corresponding to the position, rotation, velocity, and angular velocities of the robotic arm. There are two sections of the arm &mdash; analogous to those connecting the shoulder and elbow (i.e., the humerus), and the elbow to the wrist (i.e., the forearm) on a human body.
@@ -80,7 +72,7 @@ Running this agent a few times resulted in scores from 0.03 to 0.09. Obviously, 
 To get started, there are a few high-level architecture decisions we need to make. First, we need to determine which types of algorithms are most suitable for the Reacher environment. Second, we need to determine how many "brains" we want controlling the actions of our agents.
 
 #### Policy-based vs Value-based Methods
-There are two key differences in the Reacher environment compared to the previous ['Navigation' project](https://github.com/tommytracey/DeepRL-P1-Navigation):
+There are two key differences in the Reacher environment compared to the previous ['Navigation' project](https://github.com/mhmohona/Udacity-DeepReinforcementLearning-Nanodegree-Phase3/tree/master/Project1_Navigation):
 1. **Multple agents** &mdash; The version of the environment I'm tackling in this project has 20 different agents, whereas the Navigation project had only a single agent. To keep things simple, I decided to use a single brain to control all 20 agents, rather than training 20 individual brains. Training multiple brains seemed unnecessary since all of the agents are essentially performing the same task under the same conditions. Also, training 20 brains would take a really long time!
 2. **Continuous action space** &mdash; The action space is now _continuous_, which allows each agent to execute more complex and precise movements. Essentially, there's an unlimited range of possible action values to control the robotic arm, whereas the agent in the Navigation project was limited to four _discrete_ actions: left, right, forward, backward.
 
@@ -100,8 +92,6 @@ I used [this vanilla, single-agent DDPG](https://github.com/udacity/deep-reinfor
 Actor-critic methods leverage the strengths of both policy-based and value-based methods.
 
 Using a policy-based approach, the agent (actor) learns how to act by directly estimating the optimal policy and maximizing reward through gradient ascent. Meanwhile, employing a value-based approach, the agent (critic) learns how to estimate the value (i.e., the future cumulative reward) of different state-action pairs. Actor-critic methods combine these two approaches in order to accelerate the learning process. Actor-critic agents are also more stable than value-based agents, while requiring fewer training samples than policy-based agents.
-
-You can find the actor-critic logic implemented as part of the `Agent()` class [here](https://github.com/tommytracey/DeepRL-P2-Continuous-Control/blob/master/ddpg_agent.py#L45) in `ddpg_agent.py` of the source code. The actor-critic models can be found via their respective `Actor()` and `Critic()` classes [here](https://github.com/tommytracey/DeepRL-P2-Continuous-Control/blob/master/model.py) in `models.py`.
 
 Note: As we did with Double Q-Learning in the last project, we're again leveraging local and target networks to improve stability. This is where one set of parameters `w` is used to select the best action, and another set of parameters `w'` is used to evaluate that action. In this project, local and target networks are implemented separately for both the actor and the critic.
 
@@ -126,8 +116,6 @@ However, this approach won't work for controlling a robotic arm. The reason is t
 
 Instead, we'll use the **Ornstein-Uhlenbeck process**, as suggested in the previously mentioned [paper by Google DeepMind](https://arxiv.org/pdf/1509.02971.pdf) (see bottom of page 4). The Ornstein-Uhlenbeck process adds a certain amount of noise to the action values at each timestep. This noise is correlated to previous noise, and therefore tends to stay in the same direction for longer durations without canceling itself out. This allows the arm to maintain velocity and explore the action space with more continuity.
 
-You can find the Ornstein-Uhlenbeck process implemented [here](https://github.com/tommytracey/DeepRL-P2-Continuous-Control/blob/master/ddpg_agent.py#L145) in the `OUNoise` class in `ddpg_agent.py` of the source code.
-
 In total, there are five hyperparameters related to this noise process.
 
 The Ornstein-Uhlenbeck process itself has three hyperparameters that determine the noise characteristics and magnitude:
@@ -138,9 +126,6 @@ The Ornstein-Uhlenbeck process itself has three hyperparameters that determine t
 Of these, I only tuned sigma. After running a few experiments, I reduced sigma from 0.3 to 0.2. The reduced noise volatility seemed to help the model converge faster.
 
 Notice also there's an epsilon parameter used to decay the noise level over time. This decay mechanism ensures that more noise is introduced earlier in the training process (i.e., higher exploration), and the noise decreases over time as the agent gains more experience (i.e., higher exploitation). The starting value for epsilon and its decay rate are two hyperparameters that were tuned during experimentation.
-
-You can find the epsilon process implemented [here](https://github.com/tommytracey/DeepRL-P2-Continuous-Control/blob/master/ddpg_agent.py#L79) in the `Agent.act()` method in `ddpg_agent.py` of the source code. While the epsilon decay is performed [here](https://github.com/tommytracey/DeepRL-P2-Continuous-Control/blob/master/ddpg_agent.py#L128) as part of the learning step.
-
 The final noise parameters were set as follows:
 
 ```python
@@ -158,9 +143,6 @@ LEARN_EVERY = 20        # learning timestep interval
 LEARN_NUM = 10          # number of learning passes
 ```
 
-You can find the learning interval implemented [here](https://github.com/tommytracey/DeepRL-P2-Continuous-Control/blob/master/ddpg_agent.py#L66) in the `Agent.step()` method in `ddpg_agent.py` of the source code.
-
-
 #### Gradient Clipping
 In early versions of my implementation, I had trouble getting my agent to learn. Or, rather, it would start to learn but then become very unstable and either plateau or collapse.
 
@@ -169,8 +151,6 @@ I suspect that one of the causes was outsized gradients. Unfortunately, I couldn
 The issue of exploding gradients is described in layman's terms in [this post](https://machinelearningmastery.com/exploding-gradients-in-neural-networks/) by Jason Brownlee. Essentially, each layer of your net amplifies the gradient it receives. This becomes a problem when the lower layers of the network accumulate huge gradients, making their respective weight updates too large to allow the model to learn anything.
 
 To combat this, I implemented gradient clipping using the `torch.nn.utils.clip_grad_norm_` function. I set the function to "clip" the norm of the gradients at 1, therefore placing an upper limit on the size of the parameter updates, and preventing them from growing exponentially. Once this change was implemented, along with batch normalization (discussed in the next section), my model became much more stable and my agent started learning at a much faster rate.
-
-You can find gradient clipping implemented [here](https://github.com/tommytracey/DeepRL-P2-Continuous-Control/blob/master/ddpg_agent.py#L112) in the "update critic" section of the `Agent.learn()` method, within `ddpg_agent.py` of the source code.
 
 Note that this function is applied after the backward pass, but before the optimization step.
 
@@ -191,8 +171,6 @@ I've used batch normalization many times in the past when building convolutional
 Similar to the exploding gradient issue mentioned above, running computations on large input values and model parameters can inhibit learning. Batch normalization addresses this problem by scaling the features to be within the same range throughout the model and across different environments and units. In additional to normalizing each dimension to have unit mean and variance, the range of values is often much smaller, typically between 0 and 1.
 
 Initially, I added batch normalization between every layer in both the actor and critic models. However, this may have been overkill, and seemed to prolong training time. I eventually reduced the use of batch normalization to just the outputs of the first fully-connected layers of both the actor and critic models.
-
-You can find batch normalization implemented [here](https://github.com/tommytracey/DeepRL-P2-Continuous-Control/blob/master/model.py#L41) for the actor, and [here](https://github.com/tommytracey/DeepRL-P2-Continuous-Control/blob/master/model.py#L75) for the critic, within `model.py` of the source code.
 
 ```python
 # actor forward pass
@@ -222,15 +200,11 @@ The replay buffer contains a collection of experience tuples with the state, act
 
 Also, experience replay improves learning through repetition. By doing multiple passes over the data, our agents have multiple opportunities to learn from a single experience tuple. This is particularly useful for state-action pairs that occur infrequently within the environment.
 
-The implementation of the replay buffer can be found [here](https://github.com/tommytracey/DeepRL-P2-Continuous-Control/blob/master/ddpg_agent.py#L167) in the `ddpg_agent.py` file of the source code.
-
-
-##### &nbsp;
 
 ### 4. Results
 Once all of the various components of the algorithm were in place, my agent was able to solve the 20 agent Reacher environment. Again, the performance goal is an average reward of at least +30 over 100 episodes, and over all 20 agents.
 
-The graph below shows the final results. The best performing agent was able to solve the environment starting with the 12th episode, with a top mean score of 39.3 in the 79th episode. The complete set of results and steps can be found in [this notebook](Continuous_Control_v8.ipynb).
+The graph below shows the final results. The best performing agent was able to solve the environment starting with the 12th episode, with a top mean score of 39.3 in the 79th episode. The complete set of results and steps can be found in [this notebook](Continuous_Control.ipynb).
 
 <img src="assets/results-graph.png" width="70%" align="top-left" alt="" title="Results Graph" />
 
@@ -242,8 +216,5 @@ The graph below shows the final results. The best performing agent was able to s
 ## Future Improvements
 - **Experiment with other algorithms** &mdash; Tuning the DDPG algorithm required a lot of trial and error. Perhaps another algorithm such as [Trust Region Policy Optimization (TRPO)](https://arxiv.org/abs/1502.05477), [Proximal Policy Optimization (PPO)](Proximal Policy Optimization Algorithms), or [Distributed Distributional Deterministic Policy Gradients (D4PG)](https://arxiv.org/abs/1804.08617) would be more robust.
 - **Add *prioritized* experience replay** &mdash; Rather than selecting experience tuples randomly, prioritized replay selects experiences based on a priority value that is correlated with the magnitude of error. This can improve learning by increasing the probability that rare and important experience vectors are sampled.
-
-##### &nbsp;
-##### &nbsp;
 
 ---
