@@ -8,7 +8,6 @@ A reward of +0.1 is provided for each timestep that the agent's hand is in the g
 In order to solve the environment, our agent must achieve a score of +30 averaged across all 20 agents for 100 consecutive episodes.
 
 
-
 ## Summary of Environment
 - Set-up: Double-jointed arm which can move to target locations.
 - Goal: Each agent must move its hand to the goal location, and keep it there.
