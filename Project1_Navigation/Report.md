@@ -10,7 +10,7 @@ It finds a policy that maximizes the expected value of the total reward over any
 
 The algorithm has a function that calculates the quality of each state-action combination Q(s<sub>t</sub>,a<sub>t</sub>) 
 
-![Img2](Assets/img2.png)
+![Img2](img/img2.png)
 
 The shown Q-table is initialized with zeros. Then, at each time step t, the agent selects an action a<sub>t</sub>
 , evaluates its consequences in terms of the immediate reward or penalty r<sub>t</sub> it receives, enters a new state s<sub>t+1</sub> (that depends on both the previous state s<sub>t</sub> and the selected action), and updates Q(s<sub>t</sub>,a<sub>t</sub>) as follows:
@@ -19,20 +19,21 @@ The shown Q-table is initialized with zeros. Then, at each time step t, the agen
 By trying all actions in all states repeatedly, it learns which state-action pairs are best overall, judged by long-term discounted reward.
 The Q-learning algorithm is shown below:   
 
-![Img5](Assets/img5.PNG)
+![Img5](img/img5.PNG)
+
 #### Deep Q-Learning:
 
 In Deep Q-Learning The Q function is represented by a deep neural net instead of a table.
 The network takes the current state as an input and outputs the q-value of each possible action associated with the current state q(s,a<sub>i</sub>). This gives the sense of the likelihood of each action being the best action to take.    
 So, basicly, the input size of the net is the **state size(dimensionality)**  while its output size is the **number of possible actions** the agent can take.
-![Img3](Assets/img3.PNG)
+![Img3](img/img3.PNG)
 
 #### Experience Replay:
 Experience replay lets online reinforcement learning agents remember and reuse experiences from the past. Here, a fixed length buffer is used to store a finite number of experiences tuples
 <s<sub>t</sub>,a<sub>t</sub>,r<sub>t+1</sub>,s<sub>t+1</sub>>.   
 A minibatch of these stored experiences is sampled and used to train the agent. The samples of the minibatch are drawn from a uniform distribution in order to break any temporal/chronological relationship between them.
 
- ![Img4](Assets/img4.png)
+ ![Img4](img/img4.png)
 
 Experience Replay allows a more efficient use of previous experiences, by using them in the learning process over and over again. When gaining real-world experience is costly, then you can get full use of them.
 
@@ -42,7 +43,7 @@ The target. The target Q-network parameters are updated less often than the prim
 
 Now, Here's the Deep Q-LEarning algorithm:
 
-![Img6](Assets/img6.png)
+![Img6](img/img6.png)
 
 #### About this project:
 For this project, you will train an agent to navigate (and collect bananas!) in a large, square world.  
