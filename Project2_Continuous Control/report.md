@@ -1,5 +1,4 @@
-
-### Project 2: Continuous Control
+# Project 2: Continuous Control
 
 ## Goal
 In this project, I build a reinforcement learning (RL) agent that controls a robotic arm within Unity's [Reacher](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md#reacher) environment. The goal is to get 20 different robotic arms to maintain contact with the green spheres.
