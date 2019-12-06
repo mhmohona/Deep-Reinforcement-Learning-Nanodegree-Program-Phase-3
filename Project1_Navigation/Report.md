@@ -93,7 +93,7 @@ Replay Buffer Size        : 1e5
 #### Final Results:
 
 Using Deep Q-Learning, the agent could solve the environment and collect more than 13 yellow bananas in less than 400 episodes.
-![Img7](Assets/img7.png)
+![Img7](img/img7.png)
 #### Ideas for future improvements:
 1) Further hyperparameter tuning.
 2) Using Double DQN
