@@ -1,3 +1,4 @@
+# Project three: Collaboration and Competition
 
 This report documents the course project 'Collaboration and Competition' where you train two agents to control rackets to bounce a ball over a net(play Tennis).
 
