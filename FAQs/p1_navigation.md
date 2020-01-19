@@ -216,6 +216,21 @@ Unity brain name: BananaBrain
        Vector Action descriptions: , , ,
 
 
+**Q13: Mmmh, I think I missed something during the lesson but going back on my project submission, I was wondering:
+why are we removing 100 episodes from the total count when the environment is solved? :thinking_face:
+I understand we have a running average, but at least shouldn't we consider that if the running average is above the threshold, then the average episode when it was solved is somewhere in the middle? (meaning episode_idx - 50)
+Given that, hopefully, your score is increasing during training on average. If we take the beginning episode corresponding to running_avg_score=13, then most likely, at this specific episode, the agent was not already able to reach that score consistently :man-shrugging:**
+
+*Ioannis Anifantakis*
+
+Answer:
+We don't achieve goal by just having an episode reaching our goal, but by having 100 consecutive episodes scoring above our score by average!
+
+Example:
+If by episode 300 the average of the last 100 episodes exceed my goal, it means that by about episode 200 I normally should have achieved my goal. :wink:
+
+PS I also removed it on my first 2 projects, but hey on my 3rd project I held the -100 score to make my overall episodes seem less and more impressive :smile:
+
 
 
 
