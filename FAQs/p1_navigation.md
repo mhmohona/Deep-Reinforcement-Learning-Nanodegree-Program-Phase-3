@@ -232,7 +232,7 @@ If by episode 300 the average of the last 100 episodes exceed my goal, it means 
 PS I also removed it on my first 2 projects, but hey on my 3rd project I held the -100 score to make my overall episodes seem less and more impressive :smile:
 
 
-
+---
 
 
 
@@ -264,8 +264,6 @@ Hope this visualization helps!
 * Solve the environment in < 1800 episodes. Current Result using DQN: Solved in 310 episodes (13.02). Now to try and improve via hyperparameter tuning and later using Double DQN, Dueling DQN, and PER (Prioritized Experience Replay). This will indeed be an exciting couple of months :grinning:
 
 * Once you start training your agents, you will notice one thing: reproducibility is not guaranteed; i.e., you will most likely get a different result between runs, sometimes by a wide margin. That's just RL :grinning:
-
----
 
 Greetings, fellow Survivors! This post is for the (roughly) 75% of you who have not started, or are just starting, with the p1_navigation project. I created an easy, tested, 12-step hands-on guide for this first project. The guide is a fleshed-out version of the two infographics already out there. There's no actual code in the guide. (If there is, where is the fun :smiley:)
 
@@ -321,7 +319,6 @@ So here it is:
     * That's the best convergence I got from about a couple of hours tuning.
     * BUT, you don't have to do this... anything in the 300-400 range should be good enough.`
 
----
 
 **(Optional) Challenge: Learning from Pixels**
 
