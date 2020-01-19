@@ -134,9 +134,86 @@ I am trying to use two conv layers and two fully connected layers.**
 
 *Kinal:* You can ignore that message and keep running next cells in Jupiter notebook. It'll start running.
 
-**Q12: 
+**Q12: I'm using Ubuntu 18.04, insallation is fine. I can import UnityEnvironment.
+But when i run `env = UnityEnvironment(file_name="Banana_Linux/Banana.x86_64")` i get a new window open sayin "made with unity" and then "Banana_x86_64 is not responding".
+and when i run `env_info = env.reset(train_mode=True)[brain_name]` , it takes forever.** 
 
+*MSJose:*  I have been running the DRLND code in Ubuntu 18.04.3 LTS since Day 1 and have not encountered any problems.
 
+Here's a partial snapshot of my environment:
+
+atari-py==0.2.6
+
+box2d-py==2.3.8
+
+graphviz==0.12
+
+gym==0.10.11
+
+gym-retro==0.7.0
+
+JSAnimation==0.1
+
+matplotlib==2.1.0
+
+mlagents==0.9.0
+
+mlagents-envs==0.9.0
+
+numpy==1.16.0
+
+pandas==0.24.0
+
+progressbar==2.5
+
+pybullet==2.5.5
+
+qtconsole==4.5.2
+
+tensorboard==1.7.0
+
+tensorboardX==1.8
+
+tensorflow==1.7.1
+
+tensorflow-gpu==1.7.1
+
+tensorflow-tensorboard==0.1.5
+
+torch==1.2.0
+
+torchsummary==1.4
+
+torchvision==0.4.0
+
+unityagents==0.4.0
+
+Try to check if there's any conflict with your packages.
+
+After you run the ff. line of code,
+
+`env = UnityEnvironment(file_name="/home/sentinel/Banana_Linux/Banana.x86_64")`
+
+you will see the "Made with Unity" logo, and then the following display on your notebook:
+
+INFO:unityagents:
+
+'Academy' started successfully!
+
+Unity Academy name: Academy
+       Number of Brains: 1
+       Number of External Brains : 1
+       Lesson number : 0
+       Reset Parameters :
+        
+Unity brain name: BananaBrain
+       Number of Visual Observations (per agent): 0
+       Vector Observation space type: continuous
+       Vector Observation space size (per agent): 37
+       Number of stacked Vector Observation: 1
+       Vector Action space type: discrete
+       Vector Action space size (per agent): 4
+       Vector Action descriptions: , , ,
 
 
 
@@ -173,9 +250,9 @@ Hope this visualization helps!
 
 * Once you start training your agents, you will notice one thing: reproducibility is not guaranteed; i.e., you will most likely get a different result between runs, sometimes by a wide margin. That's just RL :grinning:
 
-* Greetings, fellow Survivors! This post is for the (roughly) 75% of you who have not started, or are just starting, with the p1_navigation project.
+---
 
-I created an easy, tested, 12-step hands-on guide for this first project. The guide is a fleshed-out version of the two infographics already out there. There's no actual code in the guide. (If there is, where is the fun :smiley:)
+Greetings, fellow Survivors! This post is for the (roughly) 75% of you who have not started, or are just starting, with the p1_navigation project. I created an easy, tested, 12-step hands-on guide for this first project. The guide is a fleshed-out version of the two infographics already out there. There's no actual code in the guide. (If there is, where is the fun :smiley:)
 
 If you follow all the steps correctly, you should be able to solve the environment in 400-500 episodes, even using just the _default param-value pairs. Guaranteed!
 
@@ -228,6 +305,8 @@ So here it is:
 17. STRETCH GOAL: Beat 138 episodes!
     * That's the best convergence I got from about a couple of hours tuning.
     * BUT, you don't have to do this... anything in the 300-400 range should be good enough.`
+
+---
 
 **(Optional) Challenge: Learning from Pixels**
 
