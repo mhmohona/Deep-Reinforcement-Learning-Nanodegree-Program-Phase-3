@@ -50,11 +50,18 @@ The environment was solved in 912 episodes.
 
 *Bruno Conterato:* Got it! 2 Attempts: one solved in a total of 125 episodes, the other 112. The main changes was Sigma to 0.1, and batch size of 128. I tried 256, but at the time other parameters were incorrect, then I had no result.
 
+---
+
+**Q4:** I have been trying to solve this challenge using the DDPG and code base of DDPG-pendulum. I used the same parameters and all the details unchanged except updating the environment. The reward is not crossing 0.1. Any ideas? I also tried with the parameters provided in the paper as well as taking reference from the above discussions from this channel. Still no luck.
+
+*Ellyana Linden:* Try to change the hyperparameters value: 
 
 
 
 
 
+
+---
 
 
 ---
