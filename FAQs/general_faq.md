@@ -27,3 +27,15 @@ RJ  3 months ago
 @wafarag Now that I started working on 'Project 2,' I realize that modifying my 'Screen timeout settings' was not enough to prevent my workspace from disconnecting after 30 minutes of idleness. To prevent that from happening, I had to implement Udacity's recommendation found her: https://udacity.zendesk.com/hc/en-us/articles/360019820872-What-do-I-do-if-my-instance-keeps-quitting-
 
 
+So for the sake of people that will try to understand:
+if you somehow can't reproduce the results from your workspace locally, I figured that the compiled environment is not the same as the one available for download. I was trying to reproduce results with same seed but had troubles getting the same thing: the troublemaker was the difference in the compiled version of the environment :sweat_smile:
+I happen to have had to finish the ND this week, so I trained in parallel p2 and p3 (one locally the other on udacity workspace), that's how I figured it 
+
+
+Francesca  3 months ago
+Yeah, there is even a difference between the results of running the same code with the GPU and with CPU in the same workspace, also with the same seed :zany_face:.
+
+Dina AbdelRahman  3 months ago
+Exactly the CPU result is better which I don't know how that is possible but seems the parallel operation between CPU and GPU is not good like when we work exclusively on cpu
+
+
