@@ -25,7 +25,8 @@ You can try different learning rates for actor and critic. I set actor 2e-4 and 
 
 ---
 
-Firstly, Random Seed: I have been looking at how random seed is used and get conflicting views about whether to just set it once globally or to pass seed into every consumer and reset random seed locally. The Pytorch forum especially seems to favour the global approach, or at least I should say almost every example of using random seed goes something like this, which implies set once and forget:
+
+**Q4:** Firstly, Random Seed: I have been looking at how random seed is used and get conflicting views about whether to just set it once globally or to pass seed into every consumer and reset random seed locally. The Pytorch forum especially seems to favour the global approach, or at least I should say almost every example of using random seed goes something like this, which implies set once and forget:
 ```python
 SEED = 1
 random.seed(SEED)
