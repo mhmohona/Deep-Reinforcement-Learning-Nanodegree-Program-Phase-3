@@ -19,3 +19,11 @@ https://github.com/udacity/deep-reinforcement-learning/issues/13
 * The first thing I do, it's usually trying different learning rates. Let's say 0.01 / 0.001 / 0.0001.
 * Neural networks don't usually make a big difference in these projects. You can try to add an hidden layer and see, if there is a significant improvement.
 * After the learning rate, I think that two important parameters are Buffer Size and Batch Size.
+
+
+Dear All, When I work on Udacity workspace using GPU or even without GPU, the kernel got disconnected in the middle of the training session. I can't even finish a training session to the end. Any once faced this problem before? any available solution?
+
+RJ  3 months ago
+@wafarag Now that I started working on 'Project 2,' I realize that modifying my 'Screen timeout settings' was not enough to prevent my workspace from disconnecting after 30 minutes of idleness. To prevent that from happening, I had to implement Udacity's recommendation found her: https://udacity.zendesk.com/hc/en-us/articles/360019820872-What-do-I-do-if-my-instance-keeps-quitting-
+
+
