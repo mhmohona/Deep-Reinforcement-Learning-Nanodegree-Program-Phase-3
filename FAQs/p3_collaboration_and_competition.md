@@ -1,4 +1,4 @@
-# Project One: Collaboration and Competition
+# Project Three: Collaboration and Competition
 
 **Q1:** I had a very weird experience with training, when I train with GPU enabled, the agent doesn't improve over more than 2000 episodes. When I disabled GPU, the environment was solved in about 1200 episodes! What could be the cause of that?!
 
@@ -68,6 +68,7 @@ Cheers!
 
 
 
+---
 
 ---
 
