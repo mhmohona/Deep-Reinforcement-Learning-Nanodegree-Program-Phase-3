@@ -1,4 +1,6 @@
-**Q1: I tried Udacity official implementation DPDG, it needs a significant tuning. What models are you trying?**
+# Project two: Continuous Control.md
+
+**Q1:** I tried Udacity official implementation DPDG, it needs a significant tuning. What models are you trying?
 
 *z0k:* I haven’t attempted this one yet. Still working through the first part of the ND. It was this project https://github.com/udacity/RL-Quadcopter
 
@@ -58,69 +60,49 @@ The environment was solved in 912 episodes.
 
 ---
 
-Are the actor and critic supposed to have different learning rates? Is it better than them having the same? And if so, why?
+**Q5:** Are the actor and critic supposed to have different learning rates? Is it better than them having the same? And if so, why?
 
-Kinal  5 months ago
+*Kinal:*
 Nothing is a compulsion. You can experiment and use what works for you. As described in the project benchmark implementation of this project, DRL  "doesn't work yet". So its all experiment based. I also happened to notice that changing the random seed also make the difference of making or breaking of the models. For me same learning rate worked, but in the DDPG paper, they use different learning rates. So experiment and explore :stuck_out_tongue:
 
 ---
 
-was struggling with hyperparameters and jumped into the second environment that used 20 instances and it worked better for me, however, I'm still stuck in a local minima around 5 score average, any advices ?
+**Q6:** I was struggling with hyperparameters and jumped into the second environment that used 20 instances and it worked better for me, however, I'm still stuck in a local minima around 5 score average, any advices ?
 
-youben  8:03 PM
+*youben:*
 I finally managed to solve it in -47 episodes lol so we must keep it going for at least 100 episodes. The hyperparameters that I found impactful on the average score were: batch_size, buffer_size and sigma
 
 ---
 
-Please can anyone help me understand the first quiz on Policy Gradient Quiz? The answer that was obtained doesn't makes sense to me.
+**Q7:** Please can anyone help me understand the first quiz on Policy Gradient Quiz? The answer that was obtained doesn't makes sense to me.
 
-ccquiel  4 months ago
+*ccquiel:*
 The one in "What are Policy Gradient Methods" ?
 The first one says that, because we want to output porbabailites for the actions, we should use a softmax activation function for the output layer.
+
 Remember, Softmax is a function that takes as input a vector of real numbers, and normalizes it into a probability distribution.
 The second one is about the policy gradient methods being a subset of policy methods. For example, Hill climbing is a type of policy method and the Gradient Policy method is also a type of policy methods. Both estimate the policy directly without using a Q-value function as intermediary.
 
 
 ---
 
-Is there a code example somewhere of how to code the ddpg_agent.py for multiple agents for this project?
+**Q8:** Is there a code example somewhere of how to code the ddpg_agent.py for multiple agents for this project?
 
 
-MSJose:car:  4 months ago
-@Chris Palmer @Ellyana Linden The code for the 1-agent and 20-agents are identical, for both ddpg_agent.py and Continuous_Control.ipynb. The only difference is the UnityEnvironment file_name. Compared to the original files in ddpg-pendulum, the changes to ddpg_agent.py and Continuous_Control.ipynb are not very difficult, but are definitely non-trivial. For ddpg_agent.py, a trial-and-error approach would most certainly fail. For Continuous_Control.ipynb, you now need to track states, actions, rewards, dones, next_states, compared to the singular versions of these objects. I would say the changes to ddpg_agent.py are more challenging than to the Continuous_Control.ipynb itself. W.r.t. model.py, you can get away with not changing it, although a minor addition (for optimization) would help.
+*MSJose:*
+The code for the 1-agent and 20-agents are identical, for both ddpg_agent.py and Continuous_Control.ipynb. The only difference is the UnityEnvironment file_name. Compared to the original files in ddpg-pendulum, the changes to ddpg_agent.py and Continuous_Control.ipynb are not very difficult, but are definitely non-trivial. For ddpg_agent.py, a trial-and-error approach would most certainly fail. For Continuous_Control.ipynb, you now need to track states, actions, rewards, dones, next_states, compared to the singular versions of these objects. I would say the changes to ddpg_agent.py are more challenging than to the Continuous_Control.ipynb itself. W.r.t. model.py, you can get away with not changing it, although a minor addition (for optimization) would help.
 
-Chris Palmer  4 months ago
-Thanks @MSJose. You've stated that the code changes between ddpg-pendulum and this project are non-trivial, yet there are no changes between handling 1 or 20 agents, I guess once the non-trivial changes are implemented!
+*Chris Palmer:*
+You've stated that the code changes between ddpg-pendulum and this project are non-trivial, yet there are no changes between handling 1 or 20 agents, I guess once the non-trivial changes are implemented!
 It's therefore evident that I need help with what's needed for the differences between ddpg-pendulum and this project. I have code running, but no matter what parameters I have tried so far I never progress beyond 11.3. So, is that fact that I've got it running mean I've done the non-trivial bit, or have I failed to understand some core thing? Hmmm...
 
-Ellyana Linden  4 months ago
-If you can get score of 11.3, your code is running fine @Chris Palmer.Try tuning the hyperparameters.
 
-Chris Palmer  4 months ago
-Yes, trying that :slightly_smiling_face:. maybe there is something wrong in my implementation of batch normalization... any clues you can share in that regard?
-
-MSJose:car:  4 months ago
-@Chris Palmer W.r.t. model.py, stick with the 400/300 units for both Actor and Critic. Also, try batch normalization on only fc1 and fcs1 of Actor and Critic, respectively. See if that helps. With this project, IF you go over 500 episodes without convergence, there is something not totally right with your implementation.
-
-MSJose:car:  4 months ago
-@Chris Palmer Another thing you will find useful is 6. Benchmark Implementation, especially Attempt 3 and Attempt 4. Read through those, maybe a couple of times, and that will help you (if you haven't done the things mentioned there).
-
-Chris Palmer  4 months ago
-That does look useful. I've implemented point 3, can't figure out what to do for 4 though "At this point, we decided to get less aggressive with the number of updates per time step. In particular, instead of updating the actor and critic networks 20 times at every timestep, we amended the code to update the networks 10 times after every 20 timesteps. The corresponding scores are plotted below." Any advice?
-
-Chris Palmer  4 months ago
-[UPDATE] - figured this one out. Making progress, sort of, as now up to 19.3 but stuck there... Lots of experimentation required!
-@MSJose - not sure how to do batch norm only on one layer. I set up my batch norm as self.bn1 = nn.BatchNorm1d(state_size). The only way that I've been able to work with that is to have a line like this at the beginning of the forward of the Actor and Critic: x = self.bn1(state). After that I am doing x = F.relu(self.fc1(x)). So, is that what you mean? I tried x = F.relu(self.bn1(self.fc1(state))) as suggested by the project tips, but that caused an error about array sizes. How would I set up my batch norm to work with that idea? (edited) 
-
-Hugo Oliveira  4 months ago
-@Chris Palmer I believe you are doing everything well, you just need to change the self.bn1 = nn.BatchNorm1d(state_size) to self.bn1 = nn.BatchNorm1d(output_of_your_fc1) because you want to normalize after you pass through your first fully connected layer.
-
-Chris Palmer  4 months ago
-Thanks @Hugo Oliveira. Yes, I worked that out... I've since found that my major issue is that I wasn't calculating my moving average correctly, so my model was doing well enough but I didn't realize it!
+*MSJose:*
+@Chris Palmer W.r.t. model.py, stick with the 400/300 units for both Actor and Critic. Also, try batch normalization on only fc1 and fcs1 of Actor and Critic, respectively. See if that helps. With this project, IF you go over 500 episodes without convergence, there is something not totally right with your implementation.Another thing you will find useful is 6. Benchmark Implementation, especially Attempt 3 and Attempt 4. Read through those, maybe a couple of times, and that will help you (if you haven't done the things mentioned there).
 
 ---
 
-Hello everyone, I implemented project 2 based on the pendulum code, without changing the hyperparameters.
+**Q9:** Hello everyone, I implemented project 2 based on the pendulum code, without changing the hyperparameters.
 I'm always getting reward(and average score) equals to Zero.
 Would someone please help me find what's wrong with the training loop below,
 Thanks!
@@ -155,33 +137,40 @@ def ddpg(n_episodes=500000, max_t=500, print_every=100):
     return scores  
 ```
 
-Eka Antonius Kurniawan  3 months ago
+*Eka Antonius Kurniawan:*
 You can try to lower noise sigma from 0.2 to 0.1.
 
-Vova  3 months ago
+*Vova:*
 Try reducing buffer_size, this may speed up training as well.
 
-Kinal  3 months ago
+*Kinal:*
 If nothing works, try with the parameters which worked for others, but play around a little with the random seed:sweat_smile:
 
 ---
 
-I have a question, why does it take longer time from episode to episode. Is it because the buffer? (for instance my 1st episode took 45sec and the number grows approximately 5sec every 10 episodes
+**Q10:** I have a question, why does it take longer time from episode to episode. Is it because the buffer? (for instance my 1st episode took 45sec and the number grows approximately 5sec every 10 episodes
 
-MSJose:car:  3 months ago
+*MSJose:*
 @Eli Shay Yes, the increase in duration (per episode) is due to the saving to the replay buffer and the subsequent "learning" from it. If you recall, here's the code (loop) in Continuous_Control.ipynb.
 In the 2nd loop, we run agent.step(), in which we call memory.add(), and then learn().
 From the many runs I've made using the 20-agent version, the increase in duration (per episode) is roughly 2x from Episode 1 to the last episode when the environment is solved.
+
 For example, in one run: 128/68 is about 1.88x
-   Episode 1 (68s)    Mean: 0.0    Moving Avg: 0.0
+   ```markdown
+Episode 1 (68s)    Mean: 0.0    Moving Avg: 0.0
    ...
    Episode 159 (128s)    Mean: 31.7    Moving Avg: 30.1
+   
 In another run: 115/56 is about 2.05x
    Episode 1 (56s)    Mean: 0.8    Moving Avg: 0.8
    ...
    Episode 105 (115s)    Mean: 38.8    Moving Avg: 30.2
-NOTE: In the 1-agent version, the increase in duration (per episode) from 1st episode to last is not as much, just about 1.6x.
+```
+   
+   
+*NOTE:* In the 1-agent version, the increase in duration (per episode) from 1st episode to last is not as much, just about 1.6x.
 Let us know about your experience on p2 so we learn from it as well. Cheers :champagne:
+```python
    for i_episode in range(1, n_episodes+1):
        ...
        for t in range(max_t):
@@ -200,20 +189,14 @@ Let us know about your experience on p2 so we learn from it as well. Cheers :cha
        if len(self.memory) > BATCH_SIZE and timestep % LEARN_EVERY == 0:
            for _ in range(LEARN_NUM):
                experiences = self.memory.sample()
-               self.learn(experiences, GAMMA) (edited) 
+               self.learn(experiences, GAMMA) (edited)
+``` 
 
-
-
-
-Wira  3 months ago
-@Eli Shay Another possible reason is because it is episodic
-In the beginning of training it would be fast because the agent would take a bad decision that caused the environment to stop (done = True)
+*Wira:*
+Another possible reason is because it is episodic.
+In the beginning of training it would be fast because the agent would take a bad decision that caused the environment to stop (done = True).
 But later on when the agents get better, it would be able to maintain a longer episode, hence a longer epoch.
-This is of course related to saving experiences to replay buffer too
-I hope it helps
-Thanks
-
-
+This is of course related to saving experiences to replay buffer too.
 
 
 
@@ -222,13 +205,16 @@ Thanks
 
 ---
 
+---
+
 
 ---
 
 
-Ioannis Anifantakis  
+## Tips from Ioannis Anifantakis  
 
 ![image](https://user-images.githubusercontent.com/14244685/73572480-1a4b8d00-449b-11ea-9d4f-47e8482076e9.png)
+
 The above results refer to the exactly same architecture with the exact same hyperparams. You can clearly see how faster and efficient the 20 Agents approach is compared to the 1 Agent approach.
 So may I suggest you guys go directly for the 20 agents solution, as it will train much easier and faster.
 
