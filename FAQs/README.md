@@ -1,4 +1,4 @@
-As a part of the **PyTorch scholarship**, those who got the scholarship were in a slack channel. Here I have jot down questions has been asked there in slack hoping it will be easier for me when I will revice course content in future. As well as maybe some other will find it benificial. 
+As a part of the **PyTorch scholarship**, those who got the scholarship were in a slack channel. Here I have jot down questions has been asked there in slack and answers given by other scholarship holders hoping it will be easier for me when I will revice course content in future. As well as maybe some other will find it benificial. 
 
 
 ## General FAQs: 
