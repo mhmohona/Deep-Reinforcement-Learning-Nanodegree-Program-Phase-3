@@ -1,18 +1,24 @@
+# Project One: Navigation
 
-**Q1: Though, I do not make progress enough but from curiosity I want to know, Is it possible to do the projects in google colab?** 
+**Q1:** Though, I do not make progress enough but from curiosity I want to know, Is it possible to do the projects in google colab? 
 
 *Ajit Kale:* I have written this a year ago, ask if something is not coherent today - [Reinforcement Learning on google colab](https://medium.com/@kaleajit27/reinforcement-learning-on-google-colab-9cb2e1ef51e)
 
+---
 
-**Q2: Do we need C++ for this project?**
+**Q2:** Do we need C++ for this project?
 
 *Sabrina Palis:* I was a bit confused about it too, because we were prompted to learn C++ at the beginning of the lessons of part 2. I checked the project submission requirements: "The code is written in PyTorch and Python 3." :sweat_smile:
+
+---
 
 **Q3: Is anyone else having trouble setting up the environment? I'm running Win 10 x64, and I keep getting "No module named unityagents" when trying to run the python code. I've uninstalled and reinstalled Anaconda and gone through all the instructions over and over again and can't get it working. Any ideas would be appreciated.**
 
 *MSJose:* I've always used from unityagents import UnityEnvironment. Running unityagents==0.4.0 on Ubuntu 18.04.2 LTS. If it's running properly on your env, I guess it's OK. Also, mlagents==0.9.0 and mlagents-envs==0.9.0
 
-**Q4: hello every one  i have error between pyhton API and Unity API " The API number is not compatible between Unity and python. Python API : API-9, Unity API : API-4. " this message appears after opening unity for few seconds any clue how to solve it ?? PS using ubuntu 16**
+---
+
+**Q4:** I have error between pyhton API and Unity API " The API number is not compatible between Unity and python. Python API : API-9, Unity API : API-4. " this message appears after opening unity for few seconds any clue how to solve it ?? PS using ubuntu 16
 
 *MSJose:* I am running Unity-2018.2.3f1. Here are what I have on my local Ubuntu 18.04.3 LTS setup.
 
@@ -62,11 +68,16 @@ unityagents==0.4.0
 
 I think they should work on 16.04 as well, but you'll have to check and verify. Hopefully this helps.
 
+
+---
+
 **Q5: Can anyone explain how to interpret the rubric "Plot of Rewards"? Is this different from the plot we produce when doing the training?
 I don't understand why it says the plot should "illustrate that the agent is able to receive an average reward (over 100 episodes) of at least +13" - I cannot even get over 13 rewards in just 100 consecutive episodes - the best I can do if I run my trained model is 15 over 300 episodes, and that is not an average its an accumulated score...
 Besides which, if I try to run 100 episodes without including the if done: break then I get an error - so the environment itself doesn't permit me to run 100 episodes with a score of 13 per episode!**
 
 *MSJose:* It basically means you run your training for say, num_episodes == 2500, and then you take the average score, called the moving average, over the last 100 episodes. If this average is >= the target average of 13.0, then you stop training and you report your environment solved in current_episode - 100. Hope that helps.
+
+---
 
 **Q6: Hey guys, i am trying to run the dqn algorithm but it keeps throwing an error saying that the episode is completed. I tried doing the reset but it still doesnt work.**
 
