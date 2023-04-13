@@ -77,7 +77,7 @@ class Agent:
 
     def do_learning(self):
         if len(self.memory) > BATCH_SIZE:
-            for i in range(NUM_UPDATES):
+            for _ in range(NUM_UPDATES):
                 experiences = self.memory.sample()
                 self.learn(experiences, GAMMA)
 
@@ -155,7 +155,9 @@ class OUNoise:
     def sample(self):
         """Update internal state and return it as a noise sample"""
         x = self.state
-        dx = self.theta * (self.mu - x) + self.sigma * np.array([random.random() for i in range(len(x))])
+        dx = self.theta * (self.mu - x) + self.sigma * np.array(
+            [random.random() for _ in range(len(x))]
+        )
         self.state = x + dx
         return self.state
 
